@@ -4,14 +4,9 @@ FROM eclipse-temurin:17-jdk
 # Actualiza e instala las dependencias necesarias para Go y Python
 USER root
 
-# Instalar Go
+# Instalar dependencias necesarias (Go y Python)
 RUN apt-get update && \
-    apt-get install -y golang && \
-    rm -rf /var/lib/apt/lists/*
-
-# Instalar Python
-RUN apt-get update && \
-    apt-get install -y python3 python3-pip && \
+    apt-get install -y golang python3 python3-pip && \
     rm -rf /var/lib/apt/lists/*
 
 # Crea el usuario jenkins
@@ -26,8 +21,9 @@ USER jenkins
 # Establece el directorio de trabajo
 WORKDIR /home/jenkins/agent
 
-# Puerto opcional si vas a usar JNLP
+# Exponer el puerto para JNLP
 EXPOSE 50000
 
-# Comando para mantener el contenedor corriendo (lo puedes cambiar según cómo lo conectes)
+# Mantener el contenedor corriendo
 CMD ["sleep", "infinity"]
+
