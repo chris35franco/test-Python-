@@ -9,6 +9,10 @@ RUN apt-get update && \
     apt-get install -y golang python3 python3-pip && \
     rm -rf /var/lib/apt/lists/*
 
+# Verifica instalación de Python
+RUN python3 --version
+RUN pip3 --version
+
 # Crea el usuario jenkins
 RUN useradd -m -d /home/jenkins -s /bin/bash jenkins
 
