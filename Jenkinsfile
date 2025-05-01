@@ -17,11 +17,19 @@ pipeline {
         stage('Pruebas') {
             steps {
                 script {
-                    sh './venv/bin/pytest'
+                    // Ejecutar pruebas y generar reporte en formato JUnit
+                    sh './venv/bin/pytest --junitxml=report.xml'
                 }
             }
         }
     }
+    post {
+        always {
+            // Publicar los resultados del reporte generado
+            junit 'report.xml'
+        }
+    }
 }
+
 
 
