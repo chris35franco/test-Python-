@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'Python' }
     stages {
         stage('Descargar código') {
             steps {
@@ -9,20 +9,19 @@ pipeline {
         stage('Instalar dependencias') {
             steps {
                 script {
-                    // Asegurarse de tener un entorno virtual o instalar globalmente
                     sh 'python3 -m venv venv'
-                    sh './venv/bin/pip install -r requirements.txt' // Instala dependencias en el entorno virtual
+                    sh './venv/bin/pip install -r requirements.txt'
                 }
             }
         }
         stage('Pruebas') {
             steps {
                 script {
-                    // Ejecutar las pruebas dentro del entorno virtual
                     sh './venv/bin/pytest'
                 }
             }
         }
     }
 }
+
 
